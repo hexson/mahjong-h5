@@ -1,0 +1,30 @@
+<div class="record cont-box bbox" ng-controller="recordCtrl">
+  <div class="tab bbox">
+    <div>
+      <span ng-class="{'active': tabActive == 0}" ng-click="tab(0)">牌局统计</span>
+      <span ng-class="{'active': tabActive == 1}" ng-click="tab(1)">战绩统计</span>
+    </div>
+  </div>
+  <div class="tab-cot" ng-show="tabActive == 0">
+    <div class="tab-r">
+      <span>总牌局</span>
+      <span>0</span>
+      <span>胜率</span>
+      <span>0%</span>
+    </div>
+    <div class="tab-p-list">
+      <span class="pt20">您还没有牌局</span>
+      <span>注：战绩仅留最近7天的数据</span>
+    </div>
+  </div>
+  <div class="tab-cot" ng-show="tabActive == 1">
+    <div class="tab-rs">
+      <span class="align-center">总积分 0</span>
+      <span class="align-center">总牌局 0</span>
+    </div>
+    <div class="tab-p-list">
+      <span class="pt20">您还没有战绩</span>
+      <span>注：战绩仅留最近7天的数据</span>
+    </div>
+  </div>
+</div>
