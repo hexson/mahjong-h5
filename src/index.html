@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh" ng-app="app">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" name="viewport" />
+  <meta content="嵊州麻将" name="keyword" />
+  <meta content="嵊州麻将" name="description" />
+  <meta content="heqiang" name="author" />
+  <title>游戏大厅</title>
+  <script type="text/javascript">
+    (function(doc, win) {
+      var docEl = doc.documentElement,
+      resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+      recalc = function() {
+        var clientWidth = docEl.clientWidth;
+        if (!clientWidth) return;
+        if (clientWidth >= 750) {
+          docEl.style.fontSize = '100px';
+        } else {
+          docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+        }
+      };
+      if (!doc.addEventListener) return;
+      win.addEventListener(resizeEvt, recalc, false);
+      doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+  </script>
+  <link rel="shortcut icon" href="favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+<body>
+  <div class="root" ui-view></div>
+  <script src="js/angular/angular.min.js"></script>
+  <!-- <script src="js/angular-toastr/angular-toastr.tpls.min.js"></script> -->
+  <script src="js/angular-ui-router/angular-ui-router.min.js"></script>
+  <!-- <script src="js/ng-dialog/ngDialog.min.js"></script> -->
+  <script src="js/ng-file-upload/ng-file-upload-all.min.js"></script>
+  <script src="js/ngstorage/ngStorage.min.js"></script>
+  <script src="js/oclazyload/ocLazyLoad.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
