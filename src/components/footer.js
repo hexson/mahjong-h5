@@ -3,6 +3,6 @@
 
   angular.module('app')
   .controller('footer', ['$scope', function(vm){
-    vm.footer = 'footer';
+    // vm.footer = 'footer';
   }]);
 })();

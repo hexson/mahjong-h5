@@ -25,18 +25,18 @@
           template: '<ui-view></ui-view><ui-view name="@footer"></ui-view>'
         },
         // '@header': {
-        //   templateUrl: statics.path + 'components/header.html'
+        //   templateUrl: 'components/header.html'
         // },
         '@footer': {
-          templateUrl: statics.path + 'components/footer.html'
+          templateUrl: 'components/footer.html'
         }
       },
       resolve: {
         loadMyFile: ['$ocLazyLoad', function($ocLazyLoad){
           return $ocLazyLoad.load({
             files: [
-              // statics.path + 'components/header.js',
-              statics.path + 'components/footer.js'
+              // 'components/header.js',
+              'components/footer.js'
             ]
           });
         }]
