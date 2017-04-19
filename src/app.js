@@ -1,6 +1,5 @@
 (function(){
   'use strict';
-  '__VERSION__';
 
   angular.module('app', [
     'ui.router',
@@ -91,7 +90,7 @@
     function log(){
       console.log.apply(console, arguments);
     }
-    log('%c 2017 @Hexson', 'color:red;');
+    log('%c 2017 有朋互娱@__VERSION__', 'color:red;');
     document.querySelector('body').addEventListener('touchmove', function(e) {
       e.preventDefault();
     });
