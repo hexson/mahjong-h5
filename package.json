@@ -14,6 +14,7 @@
     "angular-toastr": "^2.1.1",
     "angular-ui-router": "^0.4.2",
     "highlight.js": "^9.9.0",
+    "jquery": "^3.2.1",
     "ng-dialog": "^1.0.0",
     "ng-file-upload": "^12.2.13",
     "ngstorage": "^0.3.11",
