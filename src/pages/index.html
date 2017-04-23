@@ -1,15 +1,31 @@
-<div class="index">
-  <div class="index-info">
-    <span class="info-avatar fl" style="background-image: url(img/index_avatar.jpg);"></span>
-    <div class="info-box bbox fl">
-      <span class="info-name">风自在</span>
-      <span class="info-balance">2800 <button>充值</button></span>
+<div class="index" ng-controller="indexCtrl" style="{{style}}">
+  <div class="index-header bbox" style="{{indexHeaderStyle}}">
+    <span class="avatar"><b style="background-image: url(img/index_avatar.jpg);"></b></span>
+    <div class="info bbox">
+      <span class="name">随便取个名</span>
+      <span class="balance">6,213</span>
     </div>
-    <button class="info-feedback fr">反馈</button>
-    <button class="info-room fr">房号进入</button>
+    <span class="room"></span>
+    <span class="share"></span>
   </div>
-  <div class="index-banner"></div>
-  <div class="index-list bbox">
-    <div><img src="img/ptx_05.png" /></div>
+  <div class="index-cot bbox" style="{{indexCotStyle}}">
+    <span class="gift"></span>
+    <ul class="bbox">
+      <li ng-click="sxmj()"><img src="img/mjsz_03.png" /></li>
+      <li><img src="img/mjsy_05.png" /></li>
+      <li><img src="img/mjzx_11.png" /></li>
+      <li><img src="img/mjsx_09.png" /></li>
+      <li><img src="img/mjxc_22.png" /></li>
+      <li><img src="img/mjzx_25.png" /></li>
+    </ul>
+  </div>
+  <div class="index-footer" style="{{indexFooterStyle}}">
+    <ul>
+      <li class="index-zj"></li>
+      <li class="index-cz"></li>
+      <li class="index-hm"></li>
+      <li class="index-hy"></li>
+      <li class="index-my"></li>
+    </ul>
   </div>
 </div>
