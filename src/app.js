@@ -21,7 +21,8 @@
       url: '/main',
       views: {
         '': {
-          template: '<ui-view></ui-view><ui-view name="@footer"></ui-view>'
+          // template: '<ui-view></ui-view><ui-view name="@footer"></ui-view>'
+          template: '<ui-view></ui-view>'
         },
         // '@header': {
         //   templateUrl: 'components/header.html'
@@ -86,7 +87,7 @@
       }
     }]);
   }])
-  .run(['$rootScope', function($rootScope){
+  .run(['$rootScope', function(vm){
     function log(){
       console.log.apply(console, arguments);
     }
@@ -94,5 +95,17 @@
     document.querySelector('body').addEventListener('touchmove', function(e) {
       e.preventDefault();
     });
+    // 计算场景的宽度
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+    if (document.body && document.body.clientWidth && document.body.clientHeight){
+      width = document.body.clientWidth;
+      height = document.body.clientHeight;
+    }
+    vm.indexWidth = width;
+    if (width >= height){
+      vm.indexWidth = height / 1280 * 720;
+      vm.style = 'width:' + vm.indexWidth + 'px';
+    }
   }]);
 })();
