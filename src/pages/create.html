@@ -1,0 +1,33 @@
+<div class="create" ng-controller="createCtrl">
+  <div class="top">
+    <!-- <a href="javascript:history.go(-1);"></a> -->
+    <a href="#/main/index"></a>
+  </div>
+  <div class="con">
+    <img class="bg" src="../img/create_78.png" />
+    <div class="wp">
+      <div class="info">
+        <div class="avatar fl"><span style="background-image: url({{info.avatar}});"></span></div>
+        <div class="nickname fl ml15">{{info.nickName}}</div>
+        <span class="balance fl">{{info.coin}}</span>
+      </div>
+      <div class="time">
+        <ul>
+          <li>
+            <div class="left fl">时间</div>
+            <div class="right fl">消耗</div>
+          </li>
+          <li ng-repeat="(k, v) in timeList">
+            <div class="left fl">
+              <span class="select bbox" ng-class="{'active': time == k}" ng-click="changeTime(k)">{{k/60}}分钟</span>
+            </div>
+            <div class="right fl">
+              <span class="reduce" ng-class="{'active': time == k}" ng-click="changeTime(k)">{{v}}</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="btn"><img src="../img/peng_16.png" ng-click="create()" /></div>
+    </div>
+  </div>
+</div>

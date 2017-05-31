@@ -1,17 +1,66 @@
-<div class="my cont-box bbox">
-  <div>
-    <span class="my-avatar" style="background-image: url(img/index_avatar.jpg);"></span>
-    <span class="my-name">风飞扬</span>
+<div class="vip my bbox" ng-controller="myCtrl">
+  <div class="top">
+    <div class="myinfo">
+      <span class="avatar" style="background-image: url({{info.avatar}});"></span>
+      <span class="coin">{{info.coin}}</span>
+      <span class="gold">{{info.bouns}}</span>
+    </div>
+    <a href="#/main/index"></a>
   </div>
-  <ul>
-    <li>
-      <span>意见反馈</span>
-    </li>
-    <li>
-      <span>服务条款</span>
-    </li>
-    <li>
-      <span>重新登录</span>
-    </li>
-  </ul>
+  <div class="cont">
+    <img class="bg" src="../img/09.png" />
+    <div class="tab">
+      <div class="tab-hd">
+        <img src="../img/12.png" ng-show="active == 1" />
+        <img src="../img/14.png" ng-show="active == 2" />
+        <div class="tab-hd-btn">
+          <span ng-class="{'active': active == 1}" ng-click="tabev(1)"></span>
+          <span ng-class="{'active': active == 2}" ng-click="tabev(2)"></span>
+        </div>
+      </div>
+      <div class="tab-cont my" ng-show="active == 1">
+        <table>
+          <tbody>
+            <tr>
+              <td>姓名</td>
+              <td><input type="text" ng-model="vipinfo.fullName" placeholder="姓名" /></td>
+            </tr>
+            <tr>
+              <td>手机</td>
+              <td><input type="text" ng-model="vipinfo.mobile" placeholder="手机" /></td>
+            </tr>
+            <tr>
+              <td>支付宝</td>
+              <td><input type="text" ng-model="vipinfo.zfb" placeholder="支付宝" /></td>
+            </tr>
+            <tr>
+              <td style="vertical-align: top;">银行卡</td>
+              <td>
+                <input type="text" ng-model="vipinfo.bank" placeholder="银行卡" />
+                <span class="tip">* 持卡人姓名与上所填姓名需一致</span>
+              </td>
+            </tr>
+            <tr>
+              <td>开户行</td>
+              <td><input type="text" ng-model="vipinfo.card" placeholder="开户行" /></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tab-cont ju" ng-show="active == 2">
+        <div class="wt">我的开局</div>
+        <div class="list" ng-repeat="v in myroom">
+          <div class="rom">
+            <p>{{v.gameName}} (房间：{{v.room}})</p>
+            <p>{{v.startExpire+'000' | date: 'MM-dd'}} {{v.expire/60}}分钟局</p>
+          </div>
+          <div class="btn">
+            <!-- <span>15:15结束</span> -->
+            <span class="into-btn"></span>
+          </div>
+        </div>
+      </div>
+      <div class="in" ng-show="active == 1" ng-click="saveVip()"><img src="../img/peng_52.png" /></div>
+    </div>
+  </div>
 </div>

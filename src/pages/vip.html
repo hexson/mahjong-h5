@@ -1,0 +1,116 @@
+<div class="vip bbox" ng-controller="vipCtrl">
+  <div class="top">
+    <div class="myinfo">
+      <span class="avatar" style="background-image: url({{info.avatar}});"></span>
+      <span class="coin">{{info.coin}}</span>
+      <span class="gold">{{info.bouns}}</span>
+    </div>
+    <a href="#/main/index"></a>
+  </div>
+  <div class="cont">
+    <img class="bg" src="../img/09.png" />
+    <div class="tab">
+      <div class="tab-hd">
+        <img src="../img/peng_44.png" ng-show="active == 1" />
+        <img src="../img/peng_45.png" ng-show="active == 2" />
+        <img src="../img/peng_46.png" ng-show="active == 3" />
+        <img src="../img/peng_47.png" ng-show="active == 4" />
+        <div class="tab-hd-btn">
+          <span ng-class="{'active': active == 1}" ng-click="tabev(1)">一级好友</span>
+          <span ng-class="{'active': active == 2}" ng-click="tabev(2)">二级好友</span>
+          <span ng-class="{'active': active == 3}" ng-click="tabev(3)">财富排行榜</span>
+          <span ng-class="{'active': active == 4}" ng-click="tabev(4)">会员信息</span>
+        </div>
+      </div>
+      <div class="tab-cont" ng-show="active == 1">
+        <div class="thead">
+          <span>头像</span>
+          <span>昵称</span>
+          <span>钻石</span>
+          <span>奖励金币</span>
+        </div>
+        <div class="tbody">
+          <span ng-repeat="v in friends">
+            <div>
+              <span class="avatar" style="background-image: url({{v.friendAvatar}});"></span>
+            </div>
+            <div class="name">{{v.friendNickName}}</div>
+            <div class="coin">{{v.total_coin}}</div>
+            <div class="gold">{{v.total_amount}}</div>
+          </span>
+          <span ng-show="!friends.length">暂无数据</span>
+        </div>
+        <div class="tfooter">一级会员数量：{{friendNum}}</div>
+      </div>
+      <div class="tab-cont" ng-show="active == 2">
+        <div class="thead">
+          <span>头像</span>
+          <span>昵称</span>
+          <span>钻石</span>
+          <span>奖励金币</span>
+        </div>
+        <div class="tbody">
+          <span ng-repeat="v in friends">
+            <div>
+              <span class="avatar" style="background-image: url({{v.friendAvatar}});"></span>
+            </div>
+            <div class="name">{{v.friendNickName}}</div>
+            <div class="coin">{{v.total_coin}}</div>
+            <div class="gold">{{v.total_amount}}</div>
+          </span>
+          <span ng-show="!friends.length">暂无数据</span>
+        </div>
+        <div class="tfooter">二级会员数量：{{friendNum}}</div>
+      </div>
+      <div class="tab-cont tops" ng-show="active == 3">
+        <div class="thead">
+          <span>头像</span>
+          <span>昵称</span>
+          <span>奖励金币</span>
+        </div>
+        <div class="tbody">
+          <span ng-repeat="v in vipTop">
+            <div>
+              <span class="avatar" style="background-image: url({{v.avatar}});"></span>
+            </div>
+            <div class="name">{{v.nickName}}</div>
+            <div class="gold">{{v.bouns}}</div>
+          </span>
+          <span ng-show="!vipTop.length">暂无数据</span>
+        </div>
+      </div>
+      <div class="tab-cont my" ng-show="active == 4">
+        <table>
+          <tbody>
+            <tr>
+              <td>姓名</td>
+              <td><input type="text" ng-model="vipinfo.fullName" placeholder="姓名" /></td>
+            </tr>
+            <tr>
+              <td>手机</td>
+              <td><input type="text" ng-model="vipinfo.mobile" placeholder="手机" /></td>
+            </tr>
+            <tr>
+              <td>支付宝</td>
+              <td><input type="text" ng-model="vipinfo.zfb" placeholder="支付宝" /></td>
+            </tr>
+            <tr>
+              <td style="vertical-align: top;">银行卡</td>
+              <td>
+                <input type="text" ng-model="vipinfo.bank" placeholder="银行卡" />
+                <span class="tip">* 持卡人姓名与上所填姓名需一致</span>
+              </td>
+            </tr>
+            <tr>
+              <td>开户行</td>
+              <td><input type="text" ng-model="vipinfo.card" placeholder="开户行" /></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="out" ng-show="active != 4" ng-click="settle()"><img src="../img/peng_39.png" /></div>
+      <div class="in" ng-show="active != 4" ng-click="invip()"><img src="../img/peng_40.png" /></div>
+      <div class="in" ng-show="active == 4" ng-click="saveVip()"><img src="../img/peng_52.png" /></div>
+    </div>
+  </div>
+</div>

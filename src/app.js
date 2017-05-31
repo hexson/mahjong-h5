@@ -11,7 +11,7 @@
   ])
   .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$ocLazyLoadProvider', '$httpProvider', '$compileProvider', 'statics', 'routes', function($stateProvider, $urlRouterProvider, $locationProvider, $ocLazyLoadProvider, $httpProvider, $compileProvider, statics, routes){
     $ocLazyLoadProvider.config({
-      debug: true
+      // debug: true
     });
     $urlRouterProvider.otherwise('/loading');
     $urlRouterProvider.when('/main', '/main/index');
@@ -48,6 +48,11 @@
     .state('main.my', stateConf('my'))
     .state('main.discove', stateConf('discove'))
     .state('main.record', stateConf('record'))
+    .state('main.create', stateConf('create'))
+    .state('main.into', stateConf('into'))
+    .state('main.score', stateConf('score'))
+    .state('main.vip', stateConf('vip'))
+    .state('main.settle', stateConf('settle'))
     ;
     /* state config:start */
     function stateConf(route, htmlfile, jsfiles){
@@ -71,30 +76,51 @@
       };
     };
     /* state config:end */
+    var parmas = {};
+    var storage = window.localStorage;
+    var str = location.search.substring(1).split('&');
+    for (var i = 0; i < str.length; i++){
+      var arr = str[i].split('=');
+      parmas[arr[0]] = arr[1];
+    }
+    storage.setItem('token', parmas.token);
+    $httpProvider.defaults.transformRequest = function(obj){
+      var str = [];
+      for(var p in obj){
+        str.push(encodeURIComponent(p)+"="+encodeURIComponent(obj[p]));
+      }
+      return str.join("&");
+    };
+    $httpProvider.defaults.headers.post={
+      'Content-Type':'application/x-www-form-urlencoded'
+    }
     $httpProvider.interceptors.push(['$rootScope', function($rootScope){
       return {
         request: function(req){
-          var md = req.url.match(/[a-zA-Z0-9-]+\.html/)[0].replace('.html', '').match(/[a-zA-Z0-9]+/)[0];
-          if (md !== 'frame' && md !== 'plugin' && routes[md]) $rootScope.openTransition = md;
-          else $rootScope.openTransition = false;
-          $rootScope.footerIsShow = false;
+          if (req.url.indexOf('token/get') < 0){
+            req.headers = angular.extend(req.headers, {
+              'Token': storage.getItem('token'),
+              'Token-Key': window.localStorage.getItem('TokenKey'),
+              'Token-Value': window.localStorage.getItem('TokenValue')
+            });
+          }
           return req;
         },
         response: function(res){
-          $rootScope.footerIsShow = !!$rootScope.openTransition;
+          if (typeof res.data === 'object') return res.data;
           return res;
         }
       }
     }]);
   }])
-  .run(['$rootScope', function(vm){
+  .run(['$rootScope', 'utils', function(vm, u){
     function log(){
       console.log.apply(console, arguments);
     }
     log('%c 2017 有朋互娱@__VERSION__', 'color:red;');
-    document.querySelector('body').addEventListener('touchmove', function(e) {
-      e.preventDefault();
-    });
+    // document.querySelector('body').addEventListener('touchmove', function(e) {
+    //   e.preventDefault();
+    // });
     // 计算场景的宽度
     var width = window.innerWidth;
     var height = window.innerHeight;
@@ -107,5 +133,17 @@
       vm.indexWidth = height / 1280 * 720;
       vm.style = 'width:' + vm.indexWidth + 'px';
     }
+    u.post('account/userinfo')
+    .then(function(res){
+      vm.info = res.data;
+    });
+    u.post('gateway/games')
+    .then(function(res){
+      vm.list = res.data;
+    });
+    u.post('gateway/RoomTimeConfig')
+    .then(function(res){
+      vm.timeList = res.data;
+    });
   }]);
 })();

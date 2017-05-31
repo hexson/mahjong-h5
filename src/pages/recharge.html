@@ -1,25 +1,17 @@
-<div class="recharge cont-box bbox">
-  <span>在线充值</span>
-  <ul>
-    <li>
-      <span>100</span>
-      <span>¥ 1</span>
-      <button>购买</button>
-    </li>
-    <li>
-      <span>1000</span>
-      <span>¥ 10</span>
-      <button>购买</button>
-    </li>
-    <li>
-      <span>10000</span>
-      <span>¥ 100</span>
-      <button>购买</button>
-    </li>
-    <li>
-      <span>100000</span>
-      <span>¥ 1000</span>
-      <button>购买</button>
-    </li>
-  </ul>
+<div class="recharge cont-box bbox" ng-controller="rechargeCtrl">
+  <div class="top">
+    <a href="#/main/index"></a>
+  </div>
+  <div class="cont">
+    <img class="bg" src="../img/peng_34.png" />
+    <ul class="lists bbox">
+      <li ng-repeat="(k, v) in denomination">
+        <div>
+          <img ng-src="{{'../img/' + img[k] + '.png'}}" />
+          <span>钻石x{{v.coin}}</span>
+        </div>
+        <span class="btn">¥{{v.rmb}}</span>
+      </li>
+    </ul>
+  </div>
 </div>

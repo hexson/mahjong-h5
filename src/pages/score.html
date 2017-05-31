@@ -1,0 +1,68 @@
+<div class="score" ng-controller="scoreCtrl">
+  <div class="top"></div>
+  <div class="con pb10" ng-hide="detailviews">
+    <img class="bg" src="../img/peng_09.png" />
+    <div class="view">
+      <a class="close" href="#/main/index"></a>
+      <div class="preview bbox">
+        <span>总牌局</span>
+        <b class="mb2">{{playercount.total}}</b>
+        <span>胜率</span>
+        <b>{{playercount.winning * 100}}%</b>
+      </div>
+      <div class="tab">
+        <img src="../img/peng_07.png" ng-show="active == 1" />
+        <img src="../img/peng_10.png" ng-show="active == 2" />
+        <div class="tab-con">
+          <div class="btn">
+            <span ng-class="{'active': active == 1}" ng-click="back()">牌局统计</span>
+            <span ng-class="{'active': active == 2}">战绩统计</span>
+          </div>
+          <div class="con-1 bbox" ng-show="active == 1">
+            <p class="p5"></p>
+            <div ng-repeat="v in playerScore">{{v.gameName}}&emsp;<text>局数：</text>{{v.total}}&emsp;<text>胜率：</text>{{v.winning * 100}}%<span ng-click="show(v.gameCode)"></span></div>
+          </div>
+          <span class="con-1-tip" ng-show="active == 1">注：战绩只保留最近七天的数据</span>
+          <div class="con-2 bbox" ng-show="active == 2">
+            <div class="total"><span class="zi">总牌局：</span>{{playerRoundScore.length}}</div>
+            <div class="item" ng-repeat="v in playerRoundScore">
+              <div class="left bbox wt">{{v.startTime+'000' | date: 'M-d'}}</div>
+              <div class="right">
+                <span class="from zi"><text class="wt">{{v.startTime+'000' | date: 'HH:mm'}}</text> 来自{{v.gameName}}</span>
+                <div class="my">
+                  <span class="avatar bbox fl" style="background-image: url({{info.avatar}});"></span>
+                  <span class="name ml10 fl">{{info.nickName}}</span>
+                  <span class="result pr10 fr" ng-click="showDetail(v)">{{v.score < 0 ? v.score : '+' + v.score}} ></span>
+                </div>
+                <span class="de ln">{{v.expire / 60}}分钟局</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="con pb10" ng-show="detailviews">
+    <img class="bg" src="../img/peng_09.png" />
+    <div class="view">
+      <a class="close" ng-click="hideDetail()"></a>
+      <div class="detail bbox">
+        <div class="room">房号：<span class="ye">{{item.room}}</span>&emsp;嵊州麻将 (已结束)</div>
+        <div class="onwer">
+          <span class="avatar bbox" style="background-image: url({{owner.avatar}});"></span>
+          <span class="name"><text class="wt">房主</text> {{owner.nickName}}</span>
+          <span class="time">{{item.startTime+'000' | date: 'M-dd HH:mm'}}创局</span>
+        </div>
+        <div class="ctime">牌局时长{{item.expire / 60}}分钟</div>
+        <div class="users">
+          <div class="item" ng-repeat="v in playerDetail">
+            <span class="avatar" style="background-image: url({{v.avatar}});"></span>
+            <span class="name">{{v.nickName}}</span>
+            <span class="result ye">{{v.score < 0 ? v.score : '+' + v.score}}</span>
+          </div>
+        </div>
+        <div class="btn"><img src="../img/peng_16.png" ng-click="create()" /></div>
+      </div>
+    </div>
+  </div>
+</div>

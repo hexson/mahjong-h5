@@ -1,0 +1,19 @@
+<div class="vip settle bbox" ng-controller="settleCtrl">
+  <div class="top">
+    <div class="myinfo">
+      <span class="avatar" style="background-image: url({{info.avatar}});"></span>
+      <span class="coin">{{info.coin}}</span>
+      <span class="gold">{{info.bouns}}</span>
+    </div>
+    <a href="#/main/vip"></a>
+  </div>
+  <div class="cont">
+    <img class="bg" src="../img/create_78.png" />
+    <div class="con">
+      <div class="ln3">可提取奖励：{{info.bouns}}金币</div>
+      <div>提取金币 <input type="text" ng-model="amount" ng-keyup="hide()" /></div>
+      <div class="ln3"><img src="../img/peng_55.png" ng-click="settle()" /></div>
+      <span class="tb" ng-show="result">恭喜您，金币提取成功，请等待审核</span>
+    </div>
+  </div>
+</div>

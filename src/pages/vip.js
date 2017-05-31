@@ -2,7 +2,7 @@
   'use strict';
   
   angular.module('app')
-  .controller('myCtrl', ['$scope', '$state', '$interval', '$timeout', '$rootScope', 'utils', function(vm, $state, $interval, $timeout, root, u){
+  .controller('vipCtrl', ['$scope', '$state', '$interval', '$timeout', '$rootScope', 'utils', function(vm, $state, $interval, $timeout, root, u){
     var lan = {
       ROOM_NOT_EXIST: '房间已经失效'
     };
@@ -11,9 +11,16 @@
       vm.active = active;
       switch (active){
         case 1:
+          vm.get(1);
           break;
         case 2:
-          vm.getroom();
+          vm.get(2);
+          break;
+        case 3:
+          vm.getTop();
+          break;
+        case 4:
+          vm.getVip();
           break;
       }
     }
@@ -28,7 +35,7 @@
         u.toastr(lan[code]);
       })
     }
-    vm.getVip();
+    // vm.getVip();
     vm.saveVip = function(){
       var my = vm.vipinfo;
       if (!my.fullName){
@@ -62,16 +69,41 @@
         u.toastr(lan[code]);
       })
     }
-    vm.getroom = function(){
-      u.post('account/myRoom')
+    vm.getTop = function(){
+      u.post('account/vipTop')
       .then(function(res){
         var code = res.code;
         if (code == 'SUCCESS'){
-          vm.myroom = res.data;
+          vm.vipTop = res.data;
           return;
         }
         u.toastr(lan[code]);
       })
     }
+    // vm.getTop();
+    vm.settle = function(){
+      $state.go('main.settle');
+    }
+    vm.invip = function(){
+      u.toastr('敬请期待');
+    }
+    vm.get = function(level){
+      u.post('account/friendLevel', {
+        level: level
+      })
+      .then(function(res){
+        var code = res.code;
+        if (code == 'SUCCESS'){
+          vm.friendNum = res.data.friendNum;
+          vm.friends = res.data.list;
+          return;
+        }else if (code == 'NO_FRIEND'){
+          vm.friends = [];
+          return;
+        }
+        u.toastr(lan[code]);
+      })
+    }
+    vm.get(1);
   }]);
 })();
