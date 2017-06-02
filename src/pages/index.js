@@ -24,5 +24,6 @@
       });
     }
     if (!vm.list) vm.get();
+    if (root.info.share) root.share = true;
   }]);
 })();

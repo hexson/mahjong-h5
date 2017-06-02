@@ -31,6 +31,20 @@
 </head>
 <body>
   <div class="root" ui-view></div>
+  <div class="bg ng-hide" ng-show="share"></div>
+  <div class="share-con ng-hide" ng-show="share">
+    <div>
+      <p>1、当天首次分享即可获得380钻石</p>
+      <p>2、当天第二次以及以上分享，当帐户少于380钻石才可以获得380钻石</p>
+      <small>* 点击微信右上角菜单然后即可进行分享</small>
+    </div>
+    <div>
+      <!-- <button class="fl yl" ng-click="wxShare()">分享</button> -->
+      <!-- <button class="fr" ng-click="hideShare()">取消</button> -->
+      <button ng-click="hideShare()">关闭</button>
+    </div>
+  </div>
+  <script src="//res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
   <script src="js/jquery/jquery.min.js"></script>
   <script src="js/angular/angular.min.js"></script>
   <!-- <script src="js/angular-toastr/angular-toastr.tpls.min.js"></script> -->

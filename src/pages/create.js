@@ -3,7 +3,7 @@
   
   angular.module('app')
   .controller('createCtrl', ['$scope', '$state', '$interval', '$timeout', '$rootScope', 'utils', function(vm, $state, $interval, $timeout, root, u){
-    vm.time = 600;
+    vm.time = 1800;
     var lan = {
       USER_ROOM_CREATE_MORE: '同时只可以创建3个以内的房间'
     };
