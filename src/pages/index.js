@@ -17,6 +17,16 @@
     vm.room = function(){
       $state.go('main.into');
     }
+    var bg = document.getElementById('bg');
+    vm.play = function(){
+      if (bg.paused){
+        bg.play();
+      }else {
+        bg.pause();
+      }
+      vm.paused = bg.paused;
+    }
+    vm.play();
     vm.get = function(){
       u.post('gateway/games')
       .then(function(res){
@@ -24,6 +34,6 @@
       });
     }
     if (!vm.list) vm.get();
-    if (root.info.share) root.share = true;
+    if (root.info && root.info.share) root.share = true;
   }]);
 })();

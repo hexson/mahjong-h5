@@ -154,72 +154,80 @@
     .then(function(res){
       u.post('account/shareContent')
       .then(function(data){
-        wx.config({
-          // debug: true,
-          appId: res.appId,
-          timestamp: res.timestamp,
-          nonceStr: res.nonceStr,
-          signature: res.signature,
-          jsApiList: [
-            'onMenuShareTimeline',
-            'onMenuShareAppMessage'
-          ]
-        });
-        // wx config ready
-        wx.ready(function(){
-          wx.onMenuShareTimeline({
-            title: data.data.game_shaoxing_hall_share_title, // 分享标题
-            link: 'http://api.nbyphy.com/api/passport/wxlogin', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-            imgUrl: data.data.game_shaoxing_hall_share_icon, // 分享图标
-            success: function(){ 
-              // 用户确认分享后执行的回调函数
-              // alert('用户确认分享');
-              u.toastr('分享成功')
-              u.post('account/shareCallback')
-              .then(function(shareCallback){
-                if (shareCallback.code == 'SUCCESS'){
-                  u.post('account/userinfo')
-                  .then(function(userinfo){
-                    vm.info = userinfo.data;
-                  });
-                }
-              });
-            },
-            cancel: function(){ 
-              // 用户取消分享后执行的回调函数
-              u.toastr('取消分享');
-            }
+        u.post('account/userinfo')
+        .then(function(d){
+          var imgUrl = d.data.avatar || data.data.game_shaoxing_hall_share_icon;
+          var desc = data.data.game_shaoxing_hall_share_title + '\n' + data.data.game_shaoxing_hall_share_word + '\n' + d.data.nickName + '分享微信棋牌神器，邀你一起约局';
+          console.log('imgUrl: ', imgUrl);
+          console.log('desc: ', desc);
+          wx.config({
+            // debug: true,
+            appId: res.appId,
+            timestamp: res.timestamp,
+            nonceStr: res.nonceStr,
+            signature: res.signature,
+            jsApiList: [
+              'onMenuShareTimeline',
+              'onMenuShareAppMessage'
+            ]
           });
-          wx.onMenuShareAppMessage({
-            title: data.data.game_shaoxing_hall_share_title, // 分享标题
-            desc: data.data.game_shaoxing_hall_share_word, // 分享描述
-            link: 'http://api.nbyphy.com/api/passport/wxlogin', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-            imgUrl: data.data.game_shaoxing_hall_share_icon, // 分享图标
-            type: '', // 分享类型,music、video或link，不填默认为link
-            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-            success: function () { 
-              // 用户确认分享后执行的回调函数
-              u.toastr('分享成功')
-              u.post('account/shareCallback')
-              .then(function(shareCallback){
-                if (shareCallback.code == 'SUCCESS'){
-                  u.post('account/userinfo')
-                  .then(function(userinfo){
-                    vm.info = userinfo.data;
-                  });
-                }
-              });
-            },
-            cancel: function () { 
-              // 用户取消分享后执行的回调函数
-              u.toastr('取消分享');
-            }
+          // wx config ready
+          wx.ready(function(){
+            wx.onMenuShareTimeline({
+              title: data.data.game_shaoxing_hall_share_word || data.data.game_shaoxing_hall_share_title, // 分享标题
+              link: 'http://api.nbyphy.com/api/passport/wxlogin', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+              imgUrl: imgUrl, // 分享图标
+              success: function(){ 
+                // 用户确认分享后执行的回调函数
+                // alert('用户确认分享');
+                u.toastr('分享成功')
+                u.post('account/shareCallback')
+                .then(function(shareCallback){
+                  if (shareCallback.code == 'SUCCESS'){
+                    u.post('account/userinfo')
+                    .then(function(userinfo){
+                      vm.info = userinfo.data;
+                    });
+                  }
+                });
+              },
+              cancel: function(){ 
+                // 用户取消分享后执行的回调函数
+                u.toastr('取消分享');
+              }
+            });
+            wx.onMenuShareAppMessage({
+              title: '有朋互娱', // 分享标题
+              desc: desc, // 分享描述
+              link: 'http://api.nbyphy.com/api/passport/wxlogin', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+              // imgUrl: data.data.game_shaoxing_hall_share_icon, // 分享图标
+              imgUrl: imgUrl, // 分享图标
+              type: '', // 分享类型,music、video或link，不填默认为link
+              dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+              success: function () { 
+                // 用户确认分享后执行的回调函数
+                u.toastr('分享成功')
+                u.post('account/shareCallback')
+                .then(function(shareCallback){
+                  if (shareCallback.code == 'SUCCESS'){
+                    u.post('account/userinfo')
+                    .then(function(userinfo){
+                      vm.info = userinfo.data;
+                    });
+                  }
+                });
+              },
+              cancel: function () { 
+                // 用户取消分享后执行的回调函数
+                u.toastr('取消分享');
+              }
+            });
           });
+          // wx config error
+          // wx.error(function(res){
+          //   alert(res);
+          // });
         });
-        // wx config error
-        // wx.error(function(res){
-        //   alert(res);
-        // });
       });
     });
   }]);

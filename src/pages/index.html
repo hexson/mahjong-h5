@@ -7,6 +7,8 @@
     </div>
     <span class="room" ng-click="room()">房号进入</span>
     <span class="share">活动</span>
+    <span class="offon" ng-class="{'paused': paused}" ng-click="play()">{{paused ? '音乐关' : '音乐开'}}</span>
+    <img src="../img/off.png" style="display: none;" />
   </div>
   <div class="index-cot bbox" style="{{indexCotStyle}}">
     <!-- <span class="gift"></span>
