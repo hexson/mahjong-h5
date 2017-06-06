@@ -133,6 +133,11 @@
       vm.indexWidth = height / 1280 * 720;
       vm.style = 'width:' + vm.indexWidth + 'px';
     }
+    // var bgm = document.getElementById('bgm');
+    // bgm.load();
+    vm.played = true;
+    // var html = '<audio id="bgm" autoplay="autoplay" loop="loop" style="display: none;"><source src="mp3/background_music.ogg" type="audio/ogg"><source src="mp3/background_music.mp3" type="audio/mpeg"></audio>';
+    // $('body').append(html);
     vm.hideShare = function(){
       vm.share = false;
     }

@@ -17,16 +17,30 @@
     vm.room = function(){
       $state.go('main.into');
     }
-    var bg = document.getElementById('bg');
+    var bgm = document.getElementById('bgm');
+    var timer;
+    vm.paused = bgm.paused;
     vm.play = function(){
-      if (bg.paused){
-        bg.play();
+      if (bgm.paused){
+        bgm.play();
       }else {
-        bg.pause();
+        bgm.pause();
       }
-      vm.paused = bg.paused;
+      vm.paused = bgm.paused;
     }
-    vm.play();
+    // if (root.played){
+    //   bgm.load();
+    //   timer = setInterval(function(){
+    //     if (bgm.paused){
+    //       bgm.play();
+    //       vm.paused = bgm.paused;
+    //       vm.count += 1;
+    //     }else {
+    //       clearInterval(timer);
+    //       root.played = false;
+    //     }
+    //   }, 100);
+    // }
     vm.get = function(){
       u.post('gateway/games')
       .then(function(res){
