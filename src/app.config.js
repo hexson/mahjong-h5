@@ -18,5 +18,6 @@
     score: ['pages/score.html', 'pages/score.js'],
     vip: ['pages/vip.html', 'pages/vip.js'],
     settle: ['pages/settle.html', 'pages/settle.js'],
+    pay: ['pages/pay.html', 'pages/pay.js'],
   })
 })();

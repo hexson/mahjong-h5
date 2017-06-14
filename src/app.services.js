@@ -8,12 +8,13 @@
         // data = angular.extend(data || {}, { token: this.storage('token') });
         data = data || {};
         var that = this, http;
+        if (url != 'token/get') url = url.indexOf('http') >= 0 ? url : api+url;
         if (url != 'token/get' && !this.storage('TokenKey')){
           return $http.post(api+'token/get').then(function(res){
             if (res.code === 'SUCCESS'){
               that.storage('TokenKey', res.data.TokenKey);
               that.storage('TokenValue', res.data.TokenValue);
-              http = $http.post(api+url, data);
+              http = $http.post(url, data);
               http.catch(function(err){
                 console.log(err);
               });
@@ -21,7 +22,7 @@
             }
           })
         }
-        http = $http.post(api+url, data);
+        http = $http.post(url, data);
         http.catch(function(err){
           console.log(err);
         });

@@ -53,6 +53,7 @@
     .state('main.score', stateConf('score'))
     .state('main.vip', stateConf('vip'))
     .state('main.settle', stateConf('settle'))
+    .state('main.pay', stateConf('pay'))
     ;
     /* state config:start */
     function stateConf(route, htmlfile, jsfiles){
@@ -78,7 +79,7 @@
     /* state config:end */
     var parmas = {};
     var storage = window.localStorage;
-    var str = location.search.substring(1).split('&');
+    var str = location.href.substr(location.href.indexOf('?')+1).split('&');
     for (var i = 0; i < str.length; i++){
       var arr = str[i].split('=');
       parmas[arr[0]] = arr[1];
