@@ -74,6 +74,9 @@ gulp.task('copy:lib', function(){
       .pipe(gulp.dest('dist/js/ngstorage/'));
   gulp.src('node_modules/oclazyload/dist/ocLazyLoad.min.js')
       .pipe(gulp.dest('dist/js/oclazyload/'));
+  gulp.src('src/js/**/*.js')
+      .pipe(uglify())
+      .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('image', function(){
