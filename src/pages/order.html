@@ -1,0 +1,20 @@
+<div class="recharge order cont-box bbox" ng-controller="orderCtrl">
+  <div class="top">
+    <a href="#/main/recharge"></a>
+  </div>
+  <div class="cont">
+    <img class="bg" src="../img/create_78.png" />
+    <div class="text">
+      <span class="title">订单信息</span>
+      <span class="hr"></span>
+      <span class="o-name">商品名称：{{coin}}钻石</span>
+      <span class="o-account">支付账户：{{info.nickName}}</span>
+      <span class="o-rmb">支付金额：¥{{rmb}}</span>
+      <span class="hr"></span>
+      <p>下单说明</p>
+      <p>1. 钻石商品为虚拟商品，一经售出，概不退换</p>
+      <p>2. 支付遇到问题，请点击反馈按钮提交客服处理 <a href="#/main/feedback">反馈</a></p>
+      <a class="btn cover-img" href="javascript:void(0);" ng-click="wxpay()"><img src="../img/wxpay13.png"></a>
+    </div>
+  </div>
+</div>

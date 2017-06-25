@@ -7,11 +7,10 @@
       ROOM_NOT_EXIST: '房间已经失效'
     };
     vm.img = ['peng_19', 'peng_20', 'peng_23', 'peng_24', 'peng_27', 'peng_28'];
-    vm.showShare = function(){
-      u.toastr('充值功能即将上线')
-    }
-    vm.hideShare = function(){
-      vm.share = false;
+    vm.wxpay = function(rmb, coin){
+      u.sstorage('rmb', rmb);
+      u.sstorage('coin', coin);
+      $state.go('main.order');
     }
     vm.get = function(){
       u.post('gateway/denomination')

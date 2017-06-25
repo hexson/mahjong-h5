@@ -11,6 +11,9 @@
       if (!/^[1-9][0-9]{0,}$/.test(vm.amount)){
         return u.toastr('请输入正确的金币数量');
       }
+      if (vm.amount < 200){
+        return u.toastr('金币提取数量需大于等于200');
+      }
       u.post('account/settle', {
         amount: vm.amount
       })
@@ -18,6 +21,8 @@
         var code = res.code;
         if (code == 'SUCCESS'){
           vm.result = true;
+          vm.userinfo();
+          u.toastr('恭喜您，金币提取成功，请等待审核');
           return;
         }
         u.toastr(lan[code]);

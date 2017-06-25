@@ -6,7 +6,7 @@
       <span class="balance">{{info.coin}}</span>
     </div>
     <span class="room" ng-click="room()">房号进入</span>
-    <span class="share">活动</span>
+    <span class="share" ng-click="adsFn()">活动</span>
     <span class="offon" ng-class="{'paused': paused}" ng-click="play()">{{paused ? '音乐关' : '音乐开'}}</span>
     <img src="../img/off.png" style="display: none;" />
   </div>
@@ -35,5 +35,22 @@
       <li class="index-hy" onclick="javascript:location='#/main/vip';"></li>
       <li class="index-my" onclick="javascript:location='#/main/my';"></li>
     </ul>
+  </div>
+  <div class="share-bg ng-hide" ng-show="share"></div>
+  <div class="share-con ng-hide" ng-show="share">
+    <div>
+      <a class="hclose" href="javascript:void(0);" ng-click="hclose()"><img src="../img/hdtclose.png"></a>
+      <img src="../img/hdt.png">
+      <a class="hbtn" href="javascript:void(0);"><img src="../img/hdtbtn.png"></a>
+    </div>
+  </div>
+  <div class="swiper-container" ng-show="ads">
+    <a class="sclose" href="javascript:void(0);" ng-click="adsFn()"><img src="../img/hdtclose.png"></a>
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" ng-repeat="v in adimg" style="background-image: url({{v.image}});">
+        <img ng-src="{{v.image}}">
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
   </div>
 </div>

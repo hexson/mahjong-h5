@@ -3,14 +3,14 @@
     <a href="#/main/index"></a>
   </div>
   <div class="cont">
-    <!-- <img class="bg" src="../img/peng_34.png" /> -->
+    <img class="bg" src="../img/peng_34.png" />
     <ul class="lists bbox">
       <li ng-repeat="(k, v) in denomination">
         <div>
           <img ng-src="{{'../img/' + img[k] + '.png'}}" />
           <span>钻石x{{v.coin}}</span>
         </div>
-        <span class="btn" ng-click="showShare()">¥{{v.rmb}}</span>
+        <span class="btn" ng-click="wxpay(v.rmb,v.coin)">¥{{v.rmb}}</span>
       </li>
     </ul>
   </div>

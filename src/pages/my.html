@@ -19,33 +19,68 @@
         </div>
       </div>
       <div class="tab-cont my" ng-show="active == 1">
-        <table>
-          <tbody>
-            <tr>
-              <td>姓名</td>
-              <td><input type="text" ng-model="vipinfo.fullName" placeholder="姓名" /></td>
-            </tr>
-            <tr>
-              <td>手机</td>
-              <td><input type="text" ng-model="vipinfo.mobile" placeholder="手机" /></td>
-            </tr>
-            <tr>
-              <td>支付宝</td>
-              <td><input type="text" ng-model="vipinfo.zfb" placeholder="支付宝" /></td>
-            </tr>
-            <tr>
-              <td style="vertical-align: top;">银行卡</td>
-              <td>
-                <input type="text" ng-model="vipinfo.bank" placeholder="银行卡" />
-                <span class="tip">* 持卡人姓名与上所填姓名需一致</span>
-              </td>
-            </tr>
-            <tr>
-              <td>开户行</td>
-              <td><input type="text" ng-model="vipinfo.card" placeholder="开户行" /></td>
-            </tr>
-          </tbody>
-        </table>
+        <div ng-show="showView == 'mine'">
+          <div class="list">
+            <div class="bbox" ng-click="showViewFn('feedback')">意见反馈</div>
+          </div>
+          <div class="list">
+            <div class="bbox" ng-click="showViewFn('clause')">服务条款</div>
+          </div>
+          <div class="list">
+            <div class="bbox" ng-click="logout()">重新登录</div>
+          </div>
+          <p class="mt120">抵制不良游戏 拒绝盗版游戏</p>
+          <p>注意自我保护 谨防受骗上当</p>
+          <p>适度游戏益脑 沉迷游戏伤身</p>
+          <p>合理安排时间 享受健康生活</p>
+          <p>有朋互娱 版权所有</p>
+        </div>
+        <div ng-show="showView == 'feedback'">
+          <table>
+            <tbody>
+              <tr>
+                <td>游戏名称</td>
+                <td class="align-left">
+                  <label class="label">
+                    <input type="radio" name="game" ng-model="fdback.game" value="嵊州麻将">
+                    <span class="sle {{fdback.game=='嵊州麻将'?'sled':''}}"></span>
+                    <span>嵊州麻将</span>
+                  </label>
+                </td>
+              </tr>
+              <tr>
+                <td>问题类型</td>
+                <td class="align-left">
+                  <label class="label" ng-repeat="v in FTYPE">
+                    <input type="radio" name="ftype" ng-model="fdback.ftype" ng-value="v">
+                    <span class="sle {{fdback.ftype==v?'sled':''}}"></span>
+                    <span>{{v}}</span>
+                  </label>
+                </td>
+              </tr>
+              <tr>
+                <td>手机</td>
+                <td><input class="bbox" type="text" ng-model="fdback.mobile" placeholder="手机" /></td>
+              </tr>
+              <tr>
+                <td>反馈内容</td>
+                <td class="align-left">
+                  <textarea class="bbox" ng-model="fdback.content" placeholder="反馈内容"></textarea>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div>
+            <button ng-click="showViewFn('mine')">取消</button>
+            <button ng-click="feedback()">提交</button>
+          </div>
+        </div>
+        <div ng-show="showView == 'clause'">
+          <div class="ument" ng-bind-html="ument | trustAsHtml"></div>
+          <div>
+            <button ng-click="showViewFn('mine')">返回</button>
+          </div>
+        </div>
       </div>
       <div class="tab-cont ju" ng-show="active == 2">
         <div class="wt">我的开局</div>
@@ -56,11 +91,10 @@
           </div>
           <div class="btn">
             <!-- <span>15:15结束</span> -->
-            <span class="into-btn"></span>
+            <span class="into-btn" ng-click="intogame(v)"></span>
           </div>
         </div>
       </div>
-      <div class="in" ng-show="active == 1" ng-click="saveVip()"><img src="../img/peng_52.png" /></div>
     </div>
   </div>
 </div>

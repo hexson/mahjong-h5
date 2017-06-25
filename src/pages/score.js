@@ -26,15 +26,15 @@
     }
     vm.detail = function(code){
       u.post('account/playerRoundScoreDetail', {
-        UCode: 'hhhhh'
+        UCode: code
       })
       .then(function(res){
         var code = res.code;
         if (code == 'SUCCESS'){
           vm.playerDetail = res.data;
-          u.each(res.data, function(v){
-            if (v.owner == 1) vm.owner = v;
-          })
+          // u.each(res.data, function(v){
+          //   if (v.owner == 1) vm.owner = v;
+          // })
           return;
         }
         u.toastr(lan[code]);

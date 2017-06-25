@@ -40,7 +40,7 @@
           </span>
           <span ng-show="!friends.length">暂无数据</span>
         </div>
-        <div class="tfooter">一级会员数量：{{friendNum}}</div>
+        <div class="tfooter">一级好友人数：{{friendNum}}</div>
       </div>
       <div class="tab-cont" ng-show="active == 2">
         <div class="thead">
@@ -60,7 +60,7 @@
           </span>
           <span ng-show="!friends.length">暂无数据</span>
         </div>
-        <div class="tfooter">二级会员数量：{{friendNum}}</div>
+        <div class="tfooter">二级好友人数：{{friendNum}}</div>
       </div>
       <div class="tab-cont tops" ng-show="active == 3">
         <div class="thead">
@@ -91,25 +91,28 @@
               <td><input type="text" ng-model="vipinfo.mobile" placeholder="手机" /></td>
             </tr>
             <tr>
-              <td>支付宝</td>
-              <td><input type="text" ng-model="vipinfo.zfb" placeholder="支付宝" /></td>
+              <td class="p-r" style="vertical-align: top;" ng-click="typefn('zfb')"><span class="ac {{type == 'zfb' ? 'q' : ''}}"></span>支付宝</td>
+              <td>
+                <input type="text" ng-model="vipinfo.zfb" ng-disabled="type == 'card'" placeholder="支付宝" />
+                <span class="tip">* 点击选择左侧文字支付宝或银行卡</span>
+              </td>
             </tr>
             <tr>
-              <td style="vertical-align: top;">银行卡</td>
+              <td class="p-r" style="vertical-align: top;" ng-click="typefn('card')"><span class="ac {{type == 'card' ? 'q' : ''}}"></span>银行卡</td>
               <td>
-                <input type="text" ng-model="vipinfo.bank" placeholder="银行卡" />
+                <input type="text" ng-model="vipinfo.bank" ng-disabled="type == 'zfb'" placeholder="银行卡" />
                 <span class="tip">* 持卡人姓名与上所填姓名需一致</span>
               </td>
             </tr>
             <tr>
               <td>开户行</td>
-              <td><input type="text" ng-model="vipinfo.card" placeholder="开户行" /></td>
+              <td><input type="text" ng-model="vipinfo.card" ng-disabled="type == 'zfb'" placeholder="开户行" /></td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="out" ng-show="active != 4" ng-click="settle()"><img src="../img/peng_39.png" /></div>
-      <div class="in" ng-show="active != 4" ng-click="invip()"><img src="../img/peng_40.png" /></div>
+      <div class="out" ng-show="active != 4 && info.vip == 1" ng-click="settle()"><img src="../img/peng_39.png" /></div>
+      <div class="in" ng-show="active != 4 && info.vip == 0" ng-click="invip()"><img src="../img/peng_40.png" /></div>
       <div class="in" ng-show="active == 4" ng-click="saveVip()"><img src="../img/peng_52.png" /></div>
     </div>
   </div>

@@ -49,8 +49,8 @@
       <div class="detail bbox">
         <div class="room">房号：<span class="ye">{{item.room}}</span>&emsp;嵊州麻将 (已结束)</div>
         <div class="onwer">
-          <span class="avatar bbox" style="background-image: url({{owner.avatar}});"></span>
-          <span class="name"><text class="wt">房主</text> {{owner.nickName}}</span>
+          <span class="avatar bbox" style="background-image: url({{playerDetail[0].owner_avatar}});"></span>
+          <span class="name"><text class="wt">房主</text> {{playerDetail[0].owner_nickName}}</span>
           <span class="time">{{item.startTime+'000' | date: 'M-dd HH:mm'}}创局</span>
         </div>
         <div class="ctime">牌局时长{{item.expire / 60}}分钟</div>

@@ -1,0 +1,13 @@
+<div class="recharge joinvip cont-box bbox" ng-controller="feedbackCtrl">
+  <div class="top">
+    <a href="#/main/vip"></a>
+  </div>
+  <div class="cont">
+    <img class="bg" src="../img/create_78.png" />
+    <div class="text">
+      <div class="text-t" ng-bind-html="notice | trustAsHtml"></div>
+      <div class="text-a"><span class="{{agr ? 'q' : ''}}" ng-click="agrfn()"></span>我已阅读并同意服务条款</div>
+      <a class="text-btn" href="javascript:void(0);" ng-click="joinvip()"><img src="../img/joinvip7.png" /></a>
+    </div>
+  </div>
+</div>
