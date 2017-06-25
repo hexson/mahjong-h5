@@ -76,7 +76,7 @@ gulp.task('copy:lib', function(){
       .pipe(gulp.dest('dist/js/oclazyload/'));
   gulp.src('src/js/**/*.js')
       .pipe(uglify())
-      .pipe(gulp.dest('dist/'));
+      .pipe(gulp.dest('dist/js/'));
 });
 
 gulp.task('image', function(){
