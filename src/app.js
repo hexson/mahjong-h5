@@ -54,6 +54,9 @@
     .state('main.vip', stateConf('vip'))
     .state('main.settle', stateConf('settle'))
     .state('main.pay', stateConf('pay'))
+    .state('main.joinvip', stateConf('joinvip'))
+    .state('main.order', stateConf('order'))
+    .state('main.feedback', stateConf('feedback'))
     ;
     /* state config:start */
     function stateConf(route, htmlfile, jsfiles){
@@ -84,7 +87,7 @@
       var arr = str[i].split('=');
       parmas[arr[0]] = arr[1];
     }
-    storage.setItem('token', parmas.token);
+    if (parmas.token) storage.setItem('token', parmas.token);
     $httpProvider.defaults.transformRequest = function(obj){
       var str = [];
       for(var p in obj){
@@ -139,13 +142,14 @@
     vm.played = true;
     // var html = '<audio id="bgm" autoplay="autoplay" loop="loop" style="display: none;"><source src="mp3/background_music.ogg" type="audio/ogg"><source src="mp3/background_music.mp3" type="audio/mpeg"></audio>';
     // $('body').append(html);
-    vm.hideShare = function(){
-      vm.share = false;
+    vm.userinfo = function(fn){
+      u.post('account/userinfo')
+      .then(function(res){
+        vm.info = res.data;
+        fn && fn();
+      });
     }
-    u.post('account/userinfo')
-    .then(function(res){
-      vm.info = res.data;
-    });
+    vm.userinfo();
     u.post('gateway/games')
     .then(function(res){
       vm.list = res.data;

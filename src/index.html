@@ -27,24 +27,12 @@
     })(document, window);
   </script>
   <link rel="shortcut icon" href="favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="css/swiper.min.css" />
   <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
   <div class="root" ui-view></div>
-  <div class="share-bg ng-hide" ng-show="share"></div>
-  <div class="share-con ng-hide" ng-show="share">
-    <div>
-      <p>1、当天首次分享即可获得380钻石</p>
-      <p>2、当天第二次以及以上分享，当帐户少于380钻石才可以获得380钻石</p>
-      <small>* 点击微信右上角菜单然后即可进行分享</small>
-    </div>
-    <div>
-      <!-- <button class="fl yl" ng-click="wxShare()">分享</button> -->
-      <!-- <button class="fr" ng-click="hideShare()">取消</button> -->
-      <button ng-click="hideShare()">关闭</button>
-    </div>
-  </div>
-  <audio id="bgm" autoplay="autoplay" loop="loop" style="display: none;">
+  <audio id="bgm" loop="loop" style="display: none;">
     <source src="mp3/background_music.ogg" type="audio/ogg">
     <source src="mp3/background_music.mp3" type="audio/mpeg">
   </audio>
@@ -57,6 +45,7 @@
   <script src="js/ng-file-upload/ng-file-upload-all.min.js"></script>
   <script src="js/ngstorage/ngStorage.min.js"></script>
   <script src="js/oclazyload/ocLazyLoad.min.js"></script>
+  <script src="js/swiper-3.4.2.jquery.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

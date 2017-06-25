@@ -30,10 +30,13 @@
       },
       storage: function(key, value){
         var w = window;
+        var storage = w.localStorage;
         if (value == undefined){
-          return w.localStorage.getItem(key);
+          return storage.getItem(key);
+        }else if (value == null){
+          return storage.removeItem(key);
         }else {
-          return w.localStorage.setItem(key, value);
+          return storage.setItem(key, value);
         }
       },
       clearStorage: function(){
@@ -62,11 +65,14 @@
           }
         }
       },
-      then: function(data){
-        if (data.code.indexOf('SUCCESS') >= 0){
-          
+      sstorage: function(key, value){
+        var w = window;
+        if (value == undefined){
+          return w.sessionStorage.getItem(key);
+        }else {
+          return w.sessionStorage.setItem(key, value);
         }
-      }
+      },
     }
   }]);
 })();

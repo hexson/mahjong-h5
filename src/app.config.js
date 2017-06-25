@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('config', [])
-  .constant('api', 'http://api.nbyphy.com/api/')
+  .constant('api', 'http://api.nbyphy.cn/api/')
   .constant('statics', {
     path: '__path__'
   })
@@ -19,5 +19,8 @@
     vip: ['pages/vip.html', 'pages/vip.js'],
     settle: ['pages/settle.html', 'pages/settle.js'],
     pay: ['pages/pay.html', 'pages/pay.js'],
+    joinvip: ['pages/joinvip.html', 'pages/joinvip.js'],
+    order: ['pages/order.html', 'pages/order.js'],
+    feedback: ['pages/feedback.html', 'pages/feedback.js'],
   })
 })();
