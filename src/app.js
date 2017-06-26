@@ -13,7 +13,7 @@
     $ocLazyLoadProvider.config({
       // debug: true
     });
-    $urlRouterProvider.otherwise('/loading');
+    $urlRouterProvider.otherwise('/main/loading');
     $urlRouterProvider.when('/main', '/main/index');
     $locationProvider.hashPrefix('');
     $stateProvider
@@ -42,7 +42,7 @@
         }]
       }
     })
-    .state('loading', stateConf('loading'))
+    .state('main.loading', stateConf('loading'))
     .state('main.index', stateConf('index'))
     .state('main.recharge', stateConf('recharge'))
     .state('main.my', stateConf('my'))
@@ -150,6 +150,46 @@
       });
     }
     vm.userinfo();
+    vm.audioplayer = function(id, file, loop){
+      var audioplayer = document.getElementById(id);
+      if(audioplayer!=null){
+        document.body.removeChild(audioplayer);
+      }
+      if(typeof(file)!='undefined'){
+        if(navigator.userAgent.indexOf("MSIE")>0){// IE
+          var player = document.createElement('bgsound');
+          player.id = id;
+          player.src = file['mp3'];
+          player.setAttribute('autostart', 'true');
+          if(loop){
+            player.setAttribute('loop', 'infinite');
+          }
+          document.body.appendChild(player);
+        }else{ // Other FF Chome Safari Opera
+          var player = document.createElement('audio');
+          player.id = id;
+          player.setAttribute('autoplay','autoplay');
+          if(loop){
+            player.setAttribute('loop','loop');
+          }
+          document.body.appendChild(player);
+            
+          var mp3 = document.createElement('source');
+          mp3.src = file['mp3'];
+          mp3.type= 'audio/mpeg';
+          player.appendChild(mp3);
+            
+          var ogg = document.createElement('source');
+          ogg.src = file['ogg'];
+          ogg.type= 'audio/ogg';
+          player.appendChild(ogg);
+        }
+        document.addEventListener("WeixinJSBridgeReady", function () {
+          document.getElementById(id).play();
+        }, false);
+      }
+    }
+    vm.sharecover = false;
     u.post('gateway/games')
     .then(function(res){
       vm.list = res.data;
@@ -167,7 +207,7 @@
         u.post('account/userinfo')
         .then(function(d){
           var imgUrl = d.data.avatar || data.data.game_shaoxing_hall_share_icon;
-          var desc = data.data.game_shaoxing_hall_share_title + '\n' + data.data.game_shaoxing_hall_share_word + '\n' + d.data.nickName + '分享微信棋牌神器，邀你一起约局';
+          var desc = '有朋互娱' + '\n' + d.data.nickName + '分享微信棋牌神器，邀你一起约局，' + data.data.game_shaoxing_hall_share_word;
           console.log('imgUrl: ', imgUrl);
           console.log('desc: ', desc);
           wx.config({
@@ -185,12 +225,13 @@
           wx.ready(function(){
             wx.onMenuShareTimeline({
               title: data.data.game_shaoxing_hall_share_word || data.data.game_shaoxing_hall_share_title, // 分享标题
-              link: 'http://api.nbyphy.com/api/passport/wxlogin', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+              link: 'http://api.nbyphy.com/api/passport/wxlogin?fromOpenId='+d.data.openId, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
               imgUrl: imgUrl, // 分享图标
               success: function(){ 
                 // 用户确认分享后执行的回调函数
                 // alert('用户确认分享');
-                u.toastr('分享成功')
+                u.toastr('分享成功');
+                vm.sharecover = false;
                 u.post('account/shareCallback')
                 .then(function(shareCallback){
                   if (shareCallback.code == 'SUCCESS'){
@@ -207,16 +248,17 @@
               }
             });
             wx.onMenuShareAppMessage({
-              title: '有朋互娱', // 分享标题
+              title: data.data.game_shaoxing_hall_share_title || '绍兴游戏大厅', // 分享标题
               desc: desc, // 分享描述
-              link: 'http://api.nbyphy.com/api/passport/wxlogin', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+              link: 'http://api.nbyphy.com/api/passport/wxlogin?fromOpenId='+d.data.openId, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
               // imgUrl: data.data.game_shaoxing_hall_share_icon, // 分享图标
               imgUrl: imgUrl, // 分享图标
               type: '', // 分享类型,music、video或link，不填默认为link
               dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
               success: function () { 
                 // 用户确认分享后执行的回调函数
-                u.toastr('分享成功')
+                u.toastr('分享成功');
+                vm.sharecover = false;
                 u.post('account/shareCallback')
                 .then(function(shareCallback){
                   if (shareCallback.code == 'SUCCESS'){

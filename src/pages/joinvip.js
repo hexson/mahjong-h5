@@ -34,6 +34,7 @@
                 WeixinJSBridge.log(res.err_msg);
                   if(res.err_msg == "get_brand_wcpay_request:ok") {
                     u.toastr("支付成功,即将返回会员中心");
+                    vm.userinfo();
                     $timeout(function(){
                       $state.go('main.vip');
                     }, 2000);

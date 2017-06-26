@@ -32,6 +32,7 @@
               WeixinJSBridge.log(res.err_msg);
                 if(res.err_msg == "get_brand_wcpay_request:ok") {
                   u.toastr("支付成功,即将返回充值列表");
+                  vm.userinfo();
                   vm.disp = true;
                   $timeout(function(){
                     $state.go('main.recharge');

@@ -30,15 +30,21 @@
         }, 0);
       }
     }
-    var bgm = document.getElementById('bgm');
-    var timer;
-    var audio = new Audio();
-    audio.src = 'http://'+location.host+'/mp3/background_music.mp3';
-    audio.onloadedmetadata = function(){
-      bgm.play();
-      vm.paused = bgm.paused;
+    // var bgm = document.getElementById('bgm');
+    // var timer;
+    // var audio = new Audio();
+    // audio.src = 'http://'+location.host+'/mp3/background_music.mp3';
+    // audio.onloadedmetadata = function(){
+    //   bgm.play();
+    //   vm.paused = bgm.paused;
+    // };
+    var file = {
+      'mp3': 'http://'+location.host+'/mp3/background_music.mp3',
+      'ogg': 'http://'+location.host+'/mp3/background_music.ogg'
     };
+    vm.audioplayer('bgm', file, true);
     vm.play = function(){
+      var bgm = document.getElementById('bgm');
       if (bgm.paused){
         bgm.play();
       }else {
@@ -60,6 +66,13 @@
     vm.hclose = function(){
       vm.share = false;
       u.sstorage('close', 1);
+    }
+    vm.hbtn = function(){
+      vm.hclose();
+      root.sharecover = true;
+    }
+    vm.scClose = function(){
+      root.sharecover = false;
     }
     if (!root.info){
       vm.userinfo(function(){
