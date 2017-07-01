@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('config', [])
-  .constant('api', 'http://api.nbyphy.cn/api/')
+  .constant('api', 'http://api.nbyphy.'+(location.host.indexOf('.com')>=0?'com':'cn')+'/api/')
   .constant('statics', {
     path: '__path__'
   })

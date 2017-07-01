@@ -26,6 +26,10 @@
         u.toastr(lan[code]);
       })
     }
+    for (var i = 0; i < str.length; i++){
+      var arr = str[i].split('=');
+      parmas[arr[0]] = arr[1];
+    }
     vm.detail = function(code){
       u.post('account/playerRoundScoreDetail', {
         UCode: code
@@ -34,13 +38,17 @@
         var code = res.code;
         if (code == 'SUCCESS'){
           vm.playerDetail = res.data;
-          // u.each(res.data, function(v){
-          //   if (v.owner == 1) vm.owner = v;
-          // })
+          vm.room = res.room;
+          if (parmas.UCode){
+            vm.detailviews = true;
+          }
           return;
         }
         u.toastr(lan[code]);
       })
+    }
+    if (parmas.UCode){
+      vm.detail(parmas.UCode);
     }
     vm.showDetail = function(v){
       vm.detailviews = true;
@@ -59,19 +67,6 @@
         var code = res.code;
         if (code == 'SUCCESS'){
           vm.playerScore = res.data;
-          for (var i = 0; i < str.length; i++){
-            var arr = str[i].split('=');
-            parmas[arr[0]] = arr[1];
-          }
-          if (parmas.UCode){
-            vm.detailviews = true;
-            for (var n = 0; n < res.data.length; n++){
-              if (parmas.UCode == res.data[n].UCode){
-                vm.item = res.data[n];
-                vm.detail(parmas.UCode);
-              }
-            }
-          }
           return;
         }
         u.toastr(lan[code]);
