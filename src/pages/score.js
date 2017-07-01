@@ -7,6 +7,8 @@
     var lan = {
       ROOM_NOT_EXIST: '房间已经失效'
     };
+    var parmas = {};
+    var str = location.href.substr(location.href.indexOf('?')+1).split('&');
     vm.back = function(){
       vm.active = 1;
     }
@@ -57,6 +59,19 @@
         var code = res.code;
         if (code == 'SUCCESS'){
           vm.playerScore = res.data;
+          for (var i = 0; i < str.length; i++){
+            var arr = str[i].split('=');
+            parmas[arr[0]] = arr[1];
+          }
+          if (parmas.UCode){
+            vm.detailviews = true;
+            for (var n = 0; n < res.data.length; n++){
+              if (parmas.UCode == res.data[n].UCode){
+                vm.item = res.data[n];
+                vm.detail(parmas.UCode);
+              }
+            }
+          }
           return;
         }
         u.toastr(lan[code]);
