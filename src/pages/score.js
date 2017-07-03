@@ -13,9 +13,9 @@
       vm.active = 1;
     }
     vm.show = function(code){
-      u.post('account/playerRoundScore', {
+      u.post('account/playerRoundScore', code ? {
         gameCode: code
-      })
+      } : {})
       .then(function(res){
         var code = res.code;
         if (code == 'SUCCESS'){
@@ -59,7 +59,8 @@
       vm.detailviews = false;
     }
     vm.create = function(){
-      $state.go('main.create', {code: vm.item.gameCode})
+      // $state.go('main.create', {code: vm.item.gameCode})
+      $state.go('main.index')
     }
     vm.getScore = function(){
       u.post('account/playerScore')
@@ -77,7 +78,10 @@
       .then(function(res){
         var code = res.code;
         if (code == 'SUCCESS'){
-          vm.playercount = res.data;
+          vm.playercount = {
+            total: res.data.total,
+            winning: (res.data.winning-0).toFixed(2)
+          };
           return;
         }
         u.toastr(lan[code]);

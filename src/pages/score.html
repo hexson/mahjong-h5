@@ -16,7 +16,7 @@
         <div class="tab-con">
           <div class="btn">
             <span ng-class="{'active': active == 1}" ng-click="back()">牌局统计</span>
-            <span ng-class="{'active': active == 2}">战绩统计</span>
+            <span ng-class="{'active': active == 2}" ng-click="show(null)">战绩统计</span>
           </div>
           <div class="con-1 bbox" ng-show="active == 1">
             <p class="p5"></p>
@@ -52,6 +52,7 @@
           <span class="avatar bbox" style="background-image: url({{room.owner_avatar}});"></span>
           <span class="name"><text class="wt">房主</text> {{room.owner_nickName}}</span>
           <span class="time">{{room.startTime+'000' | date: 'M-dd HH:mm'}}创局</span>
+          <img class="qrcodeimg" src="../img/qrcode.jpg" />
         </div>
         <div class="ctime">牌局时长{{room.expire / 60}}分钟</div>
         <div class="users">
@@ -60,6 +61,7 @@
             <span class="name">{{v.nickName}}</span>
             <span class="result ye">{{v.score < 0 ? v.score : '+' + v.score}}</span>
           </div>
+          <div class="align-center" ng-show="!playerDetail.length">房间未开局，没有战绩数据</div>
         </div>
         <div class="btn"><img src="../img/peng_16.png" ng-click="create()" /></div>
       </div>
