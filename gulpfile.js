@@ -189,6 +189,7 @@ var taskList = ['copy:lib', 'copy:mp3'];
 
 if (isProd){
   taskList.push('imagemin', 'copy:hash:html', 'css:less:uglifycss', 'uglify:concat:appjs', 'uglify:pagejs', 'revReplace:index');
+  // taskList.push('copy:hash:html', 'css:less:uglifycss', 'uglify:concat:appjs', 'uglify:pagejs', 'revReplace:index');
 }else {
   taskList.push('image', 'copy:html', 'css:less', 'concat:appjs', 'copy:pagejs', 'server', 'watch');
 }
