@@ -140,6 +140,7 @@
     // var bgm = document.getElementById('bgm');
     // bgm.load();
     vm.played = true;
+    vm.left = 100;
     // var html = '<audio id="bgm" autoplay="autoplay" loop="loop" style="display: none;"><source src="mp3/background_music.ogg" type="audio/ogg"><source src="mp3/background_music.mp3" type="audio/mpeg"></audio>';
     // $('body').append(html);
     vm.userinfo = function(fn){
@@ -160,7 +161,7 @@
           var player = document.createElement('bgsound');
           player.id = id;
           player.src = file['mp3'];
-          player.setAttribute('autostart', 'true');
+          // player.setAttribute('autostart', 'true');
           if(loop){
             player.setAttribute('loop', 'infinite');
           }
@@ -168,7 +169,7 @@
         }else{ // Other FF Chome Safari Opera
           var player = document.createElement('audio');
           player.id = id;
-          player.setAttribute('autoplay','autoplay');
+          // player.setAttribute('autoplay','autoplay');
           if(loop){
             player.setAttribute('loop','loop');
           }
@@ -184,9 +185,9 @@
           ogg.type= 'audio/ogg';
           player.appendChild(ogg);
         }
-        document.addEventListener("WeixinJSBridgeReady", function () {
-          document.getElementById(id).play();
-        }, false);
+        // document.addEventListener("WeixinJSBridgeReady", function () {
+        //   document.getElementById(id).play();
+        // }, false);
       }
     }
     vm.sharecover = false;
@@ -224,7 +225,7 @@
           // wx config ready
           wx.ready(function(){
             wx.onMenuShareTimeline({
-              title: data.data.game_shaoxing_hall_share_word || data.data.game_shaoxing_hall_share_title, // 分享标题
+              title: data.data.game_shaoxing_hall_share_title+'\n'+'有朋互娱微信约牌神器，'+data.data.game_shaoxing_hall_share_word,// data.data.game_shaoxing_hall_share_word || data.data.game_shaoxing_hall_share_title, // 分享标题
               link: 'http://api.nbyphy.com/api/passport/wxlogin?fromOpenId='+d.data.openId, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
               imgUrl: imgUrl, // 分享图标
               success: function(){ 

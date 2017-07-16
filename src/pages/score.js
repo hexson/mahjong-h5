@@ -62,6 +62,12 @@
       // $state.go('main.create', {code: vm.item.gameCode})
       $state.go('main.index')
     }
+    vm.qrimg = function(openid){
+      u.post(('http://game.nbyphy.com/qrcode/qrimg.php?url='+decodeURIComponent('http://api.nbyphy.com/api/passport/wxlogin?fromOpenId='+openid)))
+      .then(function(res){
+        vm.QRIMG = res.data;
+      })
+    }
     vm.getScore = function(){
       u.post('account/playerScore')
       .then(function(res){
@@ -86,6 +92,13 @@
         }
         u.toastr(lan[code]);
       })
+      if (vm.info) vm.qrimg(vm.info.openId);
+      else {
+        u.post('account/userinfo')
+        .then(function(res){
+          vm.qrimg(res.data.openId)
+        });
+      }
     }
     vm.get();
     vm.getScore();

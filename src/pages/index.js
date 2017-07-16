@@ -43,6 +43,7 @@
       'ogg': 'http://'+location.host+'/mp3/background_music.ogg'
     };
     vm.audioplayer('bgm', file, true);
+    vm.paused = true;
     vm.play = function(){
       var bgm = document.getElementById('bgm');
       if (bgm.paused){
@@ -74,6 +75,18 @@
     vm.scClose = function(){
       root.sharecover = false;
     }
+    vm.init = function(){
+      u.post('gateway/notice')
+      .then(function(res){
+        vm.notice = res.data;
+        clearInterval(root.lefttimer);
+        root.lefttimer = setInterval(function(){
+          root.left = root.left > (-vm.notice.length * 5) ? (root.left - 0.3) : 100;
+          $('#marquee span').css('margin-left', root.left+'%');
+        }, 16);
+      });
+    }
+    vm.init();
     if (!root.info){
       vm.userinfo(function(){
         if (root.info && root.info.share == 1 && u.sstorage('close') != 1) vm.share = true;

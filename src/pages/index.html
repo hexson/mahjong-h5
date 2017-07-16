@@ -22,6 +22,9 @@
     </ul> -->
     <div class="per"></div>
     <div class="list">
+      <span class="lamp bbox" ng-show="notice.length">
+        <span id="marquee" class="text"><span>{{notice}}</span></span>
+      </span>
       <div>
         <img class="game-list" ng-repeat="(k, v) in list" ng-src="{{v.state == 'enable' ? v.icon_ready : v.icon_online}}" ng-click="create(v)" />
       </div>

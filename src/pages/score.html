@@ -52,7 +52,8 @@
           <span class="avatar bbox" style="background-image: url({{room.owner_avatar}});"></span>
           <span class="name"><text class="wt">房主</text> {{room.owner_nickName}}</span>
           <span class="time">{{room.startTime+'000' | date: 'M-dd HH:mm'}}创局</span>
-          <img class="qrcodeimg" src="../img/qrcode.jpg" />
+          <!-- <img class="qrcodeimg" src="../img/qrcode.jpg" /> -->
+          <img class="qrcodeimg" ng-src="{{QRIMG}}" />
         </div>
         <div class="ctime">牌局时长{{room.expire / 60}}分钟</div>
         <div class="users">
