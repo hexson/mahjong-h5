@@ -114,7 +114,7 @@
         response: function(res){
           if (typeof res.data === 'object'){
             if (res.data.code == 'NOLOGINED'){
-              location = 'http://api.nbyphy.com/api/passport/wxlogin?reffer='+encodeURIComponent(location.href);
+              location = 'http://api.nbyphy.com/api/passport/wxlogin?reffer='+encodeURIComponent(location.href.replace(/#/g, '$'));
             }
             return res.data;
           }

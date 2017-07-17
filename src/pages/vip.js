@@ -54,13 +54,13 @@
       if (vm.type == 'zfb' && !my.zfb){
         return u.toastr('请填写支付宝账号');
       }
-      if (vm.type == 'card' && !my.bank){
+      if (vm.type == 'card' && !my.card){
         return u.toastr('请填写银行卡号');
       }
-      if (vm.type == 'card' && !/^[1-9]\d{9,}$/.test(my.bank)){
+      if (vm.type == 'card' && !/^[1-9]\d{15,18}$/.test(my.card)){
         return u.toastr('请填写正确的银行卡号');
       }
-      if (vm.type == 'card' && !my.card){
+      if (vm.type == 'card' && !my.bank){
         return u.toastr('请填写开户行');
       }
       var data = {
