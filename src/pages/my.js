@@ -53,7 +53,7 @@
       })
     }
     vm.logout = function(){
-      u.storage('token', null);
+      $.cookie('token', null);
       window.location.href = 'http://api.nbyphy.com/api/passport/wxlogin';
     }
     vm.getroom = function(){
@@ -68,7 +68,7 @@
       })
     }
     vm.intogame = function(v){
-      location = 'http://game.nbyphy.com/' + v.game + '?room=' + v.room + '&token=' + u.storage('token');
+      location = 'http://game.nbyphy.com/' + v.game + '?room=' + v.room + '&token=' + $.cookie('token');
     }
     u.post('account/notice', {
       tag: 'UserAgreement'

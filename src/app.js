@@ -87,7 +87,8 @@
       var arr = str[i].split('=');
       parmas[arr[0]] = arr[1];
     }
-    if (parmas.token) storage.setItem('token', parmas.token);
+    // if (parmas.token) storage.setItem('token', parmas.token);
+    if (parmas.token) $.cookie('token', parmas.token);
     $httpProvider.defaults.transformRequest = function(obj){
       var str = [];
       for(var p in obj){
@@ -103,7 +104,7 @@
         request: function(req){
           if (req.url.indexOf('token/get') < 0){
             req.headers = angular.extend(req.headers, {
-              'Token': storage.getItem('token'),
+              'Token': $.cookie('token'),
               'Token-Key': window.localStorage.getItem('TokenKey'),
               'Token-Value': window.localStorage.getItem('TokenValue')
             });
@@ -111,7 +112,12 @@
           return req;
         },
         response: function(res){
-          if (typeof res.data === 'object') return res.data;
+          if (typeof res.data === 'object'){
+            if (res.data.code == 'NOLOGINED'){
+              location = 'http://api.nbyphy.com/api/passport/wxlogin?reffer='+encodeURIComponent(location.href);
+            }
+            return res.data;
+          }
           return res;
         }
       }

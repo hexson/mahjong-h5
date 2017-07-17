@@ -19,7 +19,7 @@
         var code = res.code;
         if (code == 'SUCCESS'){
           var room = res.data.room;
-          location = 'http://game.nbyphy.com/' + room.game + '?room=' + room.room + '&token=' + u.storage('token');
+          location = 'http://game.nbyphy.com/' + room.game + '?room=' + room.room + '&token=' + $.cookie('token');
           return;
         }
         u.toastr(lan[code]);
