@@ -2,8 +2,8 @@
   'use strict';
   
   angular.module('app')
-  .controller('createCtrl', ['$scope', '$state', '$interval', '$timeout', '$rootScope', 'utils', function(vm, $state, $interval, $timeout, root, u){
-    vm.time = 1800;
+  .controller('createCtrl', ['$scope', '$state', '$interval', '$timeout', '$rootScope', 'utils', function(vm, $state, $interval, $timeout, rootScope, u){
+    // vm.time = 1800;
     var lan = {
       USER_ROOM_CREATE_MORE: '同时只可以创建3个以内的房间'
     };
@@ -28,9 +28,10 @@
     vm.get = function(){
       u.post('gateway/RoomTimeConfig')
       .then(function(res){
-        root.timeList = vm.timeList = res.data;
+        vm.timeList = res.data.roomTimeConfig;
+        vm.time = res.data.defaultRoomTime;
       })
     }
-    if (!vm.timeList) vm.get();
+    vm.get();
   }]);
 })();

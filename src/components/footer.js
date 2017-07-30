@@ -3,6 +3,7 @@
 
   angular.module('app')
   .controller('footer', ['$scope', function(vm){
-    // vm.footer = 'footer';
+    var height = vm.indexWidth / 720;
+    vm.indexFooterStyle = 'height:' + (height * 144) + 'px';
   }]);
 })();

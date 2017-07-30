@@ -21,8 +21,8 @@
       url: '/main',
       views: {
         '': {
-          // template: '<ui-view></ui-view><ui-view name="@footer"></ui-view>'
-          template: '<ui-view></ui-view>'
+          template: '<ui-view></ui-view><ui-view name="@footer"></ui-view>'
+          // template: '<ui-view></ui-view>'
         },
         // '@header': {
         //   templateUrl: 'components/header.html'
