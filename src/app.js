@@ -143,12 +143,14 @@
       vm.indexWidth = height / 1280 * 720;
       vm.style = 'width:' + vm.indexWidth + 'px';
     }
+    vm.pdpx = vm.indexWidth / 720 * 144 + 0;
     // var bgm = document.getElementById('bgm');
     // bgm.load();
     vm.played = true;
     vm.left = 100;
     // var html = '<audio id="bgm" autoplay="autoplay" loop="loop" style="display: none;"><source src="mp3/background_music.ogg" type="audio/ogg"><source src="mp3/background_music.mp3" type="audio/mpeg"></audio>';
     // $('body').append(html);
+    vm.info = {};
     vm.userinfo = function(fn){
       u.post('account/userinfo')
       .then(function(res){
@@ -197,6 +199,7 @@
       }
     }
     vm.sharecover = false;
+    vm.footerHide = false;
     u.post('gateway/games')
     .then(function(res){
       vm.list = res.data;
