@@ -47,10 +47,13 @@ html,body,.root {
   -webkit-font-smoothing: antialiased;
 }
 html{
-    line-height: initial;
+  line-height: initial;
 }
 body{
-    font-size: 0.32rem;
+  font-size: 0.32rem;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 p {
   .formatting-pm();
@@ -77,6 +80,10 @@ a {
   to {
     opacity: 1;
   }
+}
+
+.root {
+  overflow: auto;
 }
 
 
@@ -693,6 +700,7 @@ a {
   min-height: 100%;
   background: url(../img/peng_02.png) no-repeat bottom center fixed;
   background-size: cover;
+  height: 100%;
   .top {
     width: 100%;
     height: 2rem;
@@ -704,7 +712,8 @@ a {
     position: relative;
     width: 90%;
     margin: 0 auto;
-    margin-top: .5rem;
+    /*margin-top: .5rem;*/
+    padding-top: .8rem;
     .bg {
       width: 100%;
     }
@@ -719,7 +728,8 @@ a {
         width: .4rem;
         height: .4rem;
         position: absolute;
-        top: .2rem;
+        /*top: .2rem;*/
+        top: 1rem;
         right: .2rem;
         background: url(../img/peng_04.png) no-repeat;
         background-size: 100%;
@@ -880,6 +890,7 @@ a {
         width: 100%;
         height: 100%;
         padding: .3rem .4rem;
+        padding-top: 1.1rem;
         color: #e2b7fa;
         font-size: .28rem;
         .wt {
@@ -1007,7 +1018,8 @@ a {
     position: relative;
     width: 90%;
     margin: 0 auto;
-    margin-top: .5rem;
+    /*margin-top: .5rem;*/
+    padding-top: .8rem;
     padding-bottom: .3rem;
     .bg {
       width: 100%;
@@ -1016,6 +1028,7 @@ a {
       width: 100%;
       height: 100%;
       padding: .5rem .8rem;
+      padding-top: 1.3rem;
       position: absolute;
       top: 0;
       left: 0;
@@ -1093,8 +1106,8 @@ a {
   background-size: cover;
   .top {
     width: 100%;
-    height: 2rem;
-    background: url(../img/peng_36.png) no-repeat center;
+    height: 1rem;
+    /*background: url(../img/peng_36.png) no-repeat center;*/
     background-size: 50%;
     position: relative;
     .myinfo {
@@ -1494,7 +1507,8 @@ a {
   .text {
     width: 80%;
     position: absolute;
-    top: .5rem;
+    /*top: .5rem;*/
+    top: 1.3rem;
     left: 10%;
   }
   .text-a {
@@ -1549,7 +1563,8 @@ a {
     width: 80%;
     position: absolute;
     left: 10%;
-    top: .5rem;
+    /*top: .5rem;*/
+    top: 1.3rem;
     color: #fff;
     text-align: center;
     font-size: .28rem;
