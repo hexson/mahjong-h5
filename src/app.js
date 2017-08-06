@@ -217,7 +217,7 @@
         u.post('account/userinfo')
         .then(function(d){
           var imgUrl = d.data.avatar || data.data.game_shaoxing_hall_share_icon;
-          var desc = '无需下载即点即玩' + '\n' + d.data.nickName + '分享微信棋牌神器，邀你一起约局，' + data.data.game_shaoxing_hall_share_word;
+          var desc = '无需下载 点击即玩' + '\n' + d.data.nickName + '分享微信棋牌神器，邀你一起约局，' + data.data.game_shaoxing_hall_share_word;
           console.log('imgUrl: ', imgUrl);
           console.log('desc: ', desc);
           wx.config({
@@ -234,7 +234,7 @@
           // wx config ready
           wx.ready(function(){
             wx.onMenuShareTimeline({
-              title: data.data.game_shaoxing_hall_share_title+'\n'+'无需下载即点即玩，微信约牌神器，'+data.data.game_shaoxing_hall_share_word,// data.data.game_shaoxing_hall_share_word || data.data.game_shaoxing_hall_share_title, // 分享标题
+              title: data.data.game_shaoxing_hall_share_title+'\n'+'无需下载 点击即玩，微信约牌神器，'+data.data.game_shaoxing_hall_share_word,// data.data.game_shaoxing_hall_share_word || data.data.game_shaoxing_hall_share_title, // 分享标题
               link: 'http://api.nbyphy.com/api/passport/wxlogin?fromOpenId='+d.data.openId, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
               imgUrl: imgUrl, // 分享图标
               success: function(){ 
